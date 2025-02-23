@@ -1,0 +1,95 @@
+/* Login Page Container */
+.login-container {
+  background: #fff;
+  padding: 30px;
+  width: 350px;
+  margin: 100px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Login Header */
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input Fields */
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Login Button */
+.login-container button {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px; /* Add margin to separate from the input field */
+}
+
+.login-container button:hover {
+  background-color: #555;
+}
+
+/* Signup Link */
+.signup-link {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Password Input with Eye Icon */
+/* Password Field Container */
+.password-container {
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Change to column to stack elements vertically */
+  align-items: flex-start; /* Align items to the start */
+  margin-bottom: 8px; /* Add margin to separate from the next element */
+}
+
+/* Password Input */
+.password-container input {
+  width: 100%;
+  padding-right: 10px; /* Adjust padding */
+  box-sizing: border-box;
+}
+
+/* Eye Icon Button */
+.toggle-password {
+  align-self: flex-end; /* Align button to the end */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px; /* Reduced size */
+  color: #666;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  margin-top: 5px; /* Add margin to separate from the input field */
+}
+
+.toggle-password:hover {
+  color: #333;
+}

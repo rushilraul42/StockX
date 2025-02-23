@@ -1,0 +1,128 @@
+/* General Styling */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+  
+  /* Home Page Container */
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Header Styling */
+  .home-container h2 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  /* Description Text */
+  .home-container p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+  
+  /* Dashboard Links */
+  .dashboard-links {
+    margin-top: 20px;
+  }
+  
+  .dashboard-links a {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 1rem;
+    display: inline-block;
+    transition: 0.3s;
+  }
+  
+  .dashboard-links a:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Navigation Bar */
+  .navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .navbar h1 {
+    color: white;
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .navbar ul li {
+    display: inline;
+  }
+  
+  .navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .navbar ul li a:hover {
+    background-color: #007bff;
+  }
+  
+  /* Logout Button */
+  .logout-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c82333;
+  }
+
+  .logout-btn {
+    background-color: #ff4b5c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .logout-btn:hover {
+    background-color: #ff1c38;
+  }
+  
