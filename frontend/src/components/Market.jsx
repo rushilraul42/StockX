@@ -3,26 +3,49 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianG
 import "../styles/Market.css";
 
 const Market = () => {
-    const [symbol, setSymbol] = useState("AAPL");
+    const [symbol, setSymbol] = useState("");
     const [data, setData] = useState([]);
     const [stocks, setStocks] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [timeRange, setTimeRange] = useState("6m"); // Default: 6 months
+    const [timeRange, setTimeRange] = useState("6m");
+
+    const timeRanges = [
+        { label: '1D', value: '1d' },
+        { label: '5D', value: '5d' },
+        { label: '1M', value: '1mo' },
+        { label: '3M', value: '3mo' },
+        { label: '6M', value: '6mo' },
+        { label: '1Y', value: '1y' },
+        { label: '5Y', value: '5y' },
+        { label: 'MAX', value: 'max' }
+    ];
 
     useEffect(() => {
         fetchStockList();
     }, []);
 
     useEffect(() => {
-        fetchStockData(symbol, timeRange);
-    }, [symbol, timeRange]); // Fetch when symbol OR timeRange changes
+        if (symbol) {
+            fetchStockData(symbol, timeRange);
+        }
+    }, [symbol, timeRange]);
 
     const fetchStockList = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/stock/list");
+            const response = await fetch("http://127.0.0.1:8000/top-companies");
             const result = await response.json();
-            setStocks(result.stocks || []);
+
+            // ✅ Fix: Map API response correctly
+            if (result.top_companies) {
+                const stockArray = Object.keys(result.top_companies).map((key) => ({
+                    symbol: key,
+                    price: result.top_companies[key].price.toFixed(2),
+                }));
+                setStocks(stockArray);
+            } else {
+                setStocks([]);
+            }
         } catch (err) {
             console.error("Failed to fetch stock list:", err);
         }
@@ -31,39 +54,36 @@ const Market = () => {
     const fetchStockData = async (symbol, range) => {
         setError(null);
         setLoading(true);
-        console.log(`Fetching data for ${symbol} with range ${range}`); 
-    
+        console.log(`Fetching data for ${symbol} with range ${range}`);
+
         try {
             const response = await fetch(`http://127.0.0.1:8000/stock/${symbol}/history?range=${range}`);
             const result = await response.json();
             setLoading(false);
-    
-            console.log("API Response:", result.history); // 🛠️ DEBUG LOG
-    
+
+            console.log("API Response:", result.history);
+
             if (!result.history || result.history.length === 0) {
                 setError("No historical data available.");
-                setData([]); 
+                setData([]);
                 return;
             }
-    
+
             const formattedData = result.history.map((item) => ({
                 date: item.date ? item.date.substring(0, 10) : "N/A",
                 price: item.close ?? 0,
             }));
-    
-            console.log("Formatted Data for Chart:", formattedData); // 🛠️ DEBUG LOG
-            setData(formattedData);
+
+            console.log("Formatted Data for Chart:", formattedData);
+
+            // Clear and update data to force re-render
+            setData([]);
+            setTimeout(() => setData(formattedData), 10);
         } catch (err) {
             setLoading(false);
             setError("Failed to fetch stock data.");
             console.error(err);
         }
-    };
-    
-
-    const handleTimeRangeChange = (range) => {
-        console.log(`Button clicked: ${range}`); // Debug log
-        setTimeRange(range); // Triggers useEffect to call fetchStockData
     };
 
     return (
@@ -82,9 +102,7 @@ const Market = () => {
                     <thead>
                         <tr>
                             <th>Symbol</th>
-                            <th>Name</th>
                             <th>Price</th>
-                            <th>Change</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,16 +110,12 @@ const Market = () => {
                             stocks.map((stock) => (
                                 <tr key={stock.symbol}>
                                     <td>{stock.symbol}</td>
-                                    <td>{stock.name}</td>
-                                    <td>${stock.price.toFixed(2)}</td>
-                                    <td className={stock.change >= 0 ? "green" : "red"}>
-                                        {stock.change >= 0 ? "▲" : "▼"} {stock.change.toFixed(2)}%
-                                    </td>
+                                    <td>${stock.price}</td>
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="4" className="loading">Loading stock data...</td>
+                                <td colSpan="2" className="loading">Loading stock data...</td>
                             </tr>
                         )}
                     </tbody>
@@ -111,32 +125,32 @@ const Market = () => {
                 <div className="chart-container">
                     <h2>Stock Price Trend</h2>
                     <p>{symbol} - {timeRange.toUpperCase()} Data</p>
+                    <div className="time-range-buttons">
+                        {timeRanges.map(range => (
+                            <button
+                                key={range.value}
+                                className={`time-button ${timeRange === range.value ? 'active' : ''}`}
+                                onClick={() => setTimeRange(range.value)}
+                            >
+                                {range.label}
+                            </button>
+                        ))}
+                    </div>
                     {loading && <p className="loading">Loading data...</p>}
                     {error && <p className="error">{error}</p>}
 
                     {!error && !loading && data.length > 0 && (
                         <>
-                            <ResponsiveContainer width="100%" height={400}>
-                                <LineChart data={data} margin={{ top: 10, right: 30, left: 20, bottom: 30 }}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="date" />
-                                    <YAxis domain={["auto", "auto"]} />
-                                    <Tooltip />
-                                    <Line type="monotone" dataKey="price" stroke="#4CAF50" strokeWidth={3} />
-                                </LineChart>
-                            </ResponsiveContainer>
-
-                            {/* Time Range Buttons */}
-                            <div className="time-buttons">
-                                {["1d", "5d", "1m", "3m", "6m", "1y", "5y", "max"].map((range) => (
-                                    <button
-                                        key={range}
-                                        className={timeRange === range ? "active" : ""}
-                                        onClick={() => handleTimeRangeChange(range)}
-                                    >
-                                        {range.toUpperCase()}
-                                    </button>
-                                ))}
+                            <div key={data.length}>
+                                <ResponsiveContainer width="100%" height={400}>
+                                    <LineChart data={data} margin={{ top: 10, right: 30, left: 20, bottom: 30 }}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="date" />
+                                        <YAxis domain={["auto", "auto"]} />
+                                        <Tooltip />
+                                        <Line type="monotone" dataKey="price" stroke="#4CAF50" strokeWidth={3} />
+                                    </LineChart>
+                                </ResponsiveContainer>
                             </div>
                         </>
                     )}

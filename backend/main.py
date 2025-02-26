@@ -16,14 +16,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ✅ Manual stock data (fallback)
-manual_stock_data = {
-    "TSLA": 204.78,
-    "AAPL": 176.30,
-    "GOOGL": 2750.50,
-    "MSFT": 329.40,
-    "AMZN": 142.65
-}
+# ✅ Predefined top companies
+TOP_COMPANIES = ["AAPL", "MSFT", "AMZN", "GOOGL", "TSLA", "NVDA", "META"]
 
 @app.get("/")
 def read_root():
@@ -37,12 +31,8 @@ def get_stock(symbol: str):
         stock = yf.Ticker(symbol)
         data = stock.history(period="1d")
 
-        # ✅ If no data found, use manual fallback
         if data.empty or data["Close"].dropna().empty:
-            if symbol.upper() in manual_stock_data:
-                return {"symbol": symbol.upper(), "price": manual_stock_data[symbol.upper()]}
-            else:
-                raise HTTPException(status_code=404, detail=f"No data found for {symbol}")
+            raise HTTPException(status_code=404, detail=f"No data found for {symbol}")
 
         return {
             "symbol": symbol.upper(),
@@ -58,27 +48,34 @@ def get_multiple_stocks(symbols: str):
         symbol_list = [s.strip().upper() for s in symbols.split(",")]
         data = yf.download(symbol_list, period="1d")["Close"]
 
-        prices = {}
-        for symbol in symbol_list:
-            # ✅ If data exists, fetch the price
-            if symbol in data.columns:
-                last_price = data[symbol].dropna().iloc[-1] if not data[symbol].dropna().empty else None
-                prices[symbol] = {"price": round(last_price, 2) if last_price else "N/A"}
-            elif symbol in manual_stock_data:
-                prices[symbol] = {"price": manual_stock_data[symbol]}
-            else:
-                prices[symbol] = {"price": "N/A"}
+        if data.empty:
+            raise HTTPException(status_code=404, detail="No stock data available")
+
+        prices = {
+            symbol: {"price": round(data[symbol].dropna().iloc[-1], 2) if not data[symbol].dropna().empty else "N/A"}
+            for symbol in symbol_list
+        }
 
         return prices
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
+# Update the default range from "6m" to "6mo"
 @app.get("/stock/{symbol}/history")
-def get_stock_history(symbol: str):
-    """Fetch historical stock prices for the maximum available period."""
+def get_stock_history(symbol: str, range: str = "6mo"):
+    """Fetch historical stock prices for the specified time range.
+    Valid periods: 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max
+    """
     try:
         stock = yf.Ticker(symbol)
-        history = stock.history(period="max")  # Fetch all available data
+        # Convert common format to yfinance format
+        range_mapping = {
+            "1m": "1mo",
+            "3m": "3mo",
+            "6m": "6mo"
+        }
+        adjusted_range = range_mapping.get(range, range)
+        history = stock.history(period=adjusted_range)
 
         if history.empty or history["Close"].dropna().empty:
             raise HTTPException(status_code=404, detail=f"No historical data found for {symbol}")
@@ -87,6 +84,24 @@ def get_stock_history(symbol: str):
         return {"symbol": symbol, "history": history_data}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
+
+@app.get("/top-companies")
+def get_top_companies():
+    """Fetch latest stock prices of the top companies dynamically from Yahoo Finance."""
+    try:
+        data = yf.download(TOP_COMPANIES, period="1d")["Close"]
+
+        if data.empty:
+            raise HTTPException(status_code=404, detail="No stock data available")
+
+        stock_prices = {
+            symbol: {"price": round(data[symbol].dropna().iloc[-1], 2) if not data[symbol].dropna().empty else "N/A"}
+            for symbol in TOP_COMPANIES
+        }
+
+        return {"top_companies": stock_prices}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching top company data: {str(e)}")  
 
 # ✅ Run the backend
 if __name__ == "__main__":

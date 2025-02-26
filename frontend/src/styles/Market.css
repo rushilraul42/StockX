@@ -104,3 +104,30 @@ h2 {
 .time-buttons button:hover {
     background-color: #bbb;
 }
+
+.time-range-buttons {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.time-button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.time-button:hover {
+    background-color: #f0f0f0;
+}
+
+.time-button.active {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
