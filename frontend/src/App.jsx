@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase";
 import Home from "./pages/Home";
 import Login from "./components/Login";
-import SignUp from "./components/SignUp"; 
+import SignUp from "./components/SignUp";
+import Market from "./components/Market";  // Import Market component
 import "./styles/App.css";
 
 const App = () => {
@@ -36,7 +37,8 @@ const App = () => {
         <nav className="navbar">
           <h1>StockX</h1>
           <ul>
-            <li><Navigate to="/" replace /></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/market">Market</Link></li>
             <li><button className="logout-btn" onClick={handleLogout}>Logout</button></li>
           </ul>
         </nav>
@@ -46,6 +48,7 @@ const App = () => {
         <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route path="/signup" element={user ? <Navigate to="/" /> : <SignUp />} />
+        <Route path="/market" element={<Market />} />  {/* New Market Route */}
       </Routes>
     </Router>
   );
