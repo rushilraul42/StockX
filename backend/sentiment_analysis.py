@@ -1,3 +1,4 @@
+#sentiment_analysis.py
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from newsapi import NewsApiClient
 import datetime

@@ -1,8 +1,9 @@
+// Login.jsx
 import React, { useState } from "react";
 import { auth, googleProvider } from "../firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // ✅ Eye icons
+import { FaEye, FaEyeSlash, FaGoogle, FaChartLine } from "react-icons/fa";
 import "../styles/Login.css";
 
 const Login = () => {
@@ -16,9 +17,8 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    // ✅ Email validation
-    if (!email.includes("@") || (!email.endsWith(".com") && !email.endsWith(".in"))) {
-      setError("Enter a valid email (must contain '@' and end with .com or .in)");
+    if (!email || !password) {
+      setError("Please enter both email and password");
       return;
     }
 
@@ -43,52 +43,74 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      {error && <p className="error-message">{error}</p>}
+    <div className="login-page">
+      <div className="login-background">
+        <div className="login-grid-lines horizontal"></div>
+        <div className="login-grid-lines vertical"></div>
+      </div>
+      
+      <div className="login-container">
+        <div className="login-logo">
+          <FaChartLine />
+          <h1>StockX</h1>
+        </div>
+        
+        <h2>SYSTEM LOGIN</h2>
+        
+        {error && <div className="error-message">{error}</div>}
 
-      <form onSubmit={handleLogin}>
-        {/* Email Input */}
-        <input
-          type="email"
-          placeholder="Email address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <form onSubmit={handleLogin}>
+          <div className="input-group">
+            <label>USER EMAIL</label>
+            <div className="input-field">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+          </div>
 
-        {/* Password Input with Eye Icon Inside */}
-        <div className="password-container">
-  <input
-    type={showPassword ? "text" : "password"}
-    placeholder="Password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-    required
-  />
-  <button
-    type="button"
-    className="toggle-password"
-    onMouseDown={() => setShowPassword(true)}
-    onMouseUp={() => setShowPassword(false)}
-    onMouseLeave={() => setShowPassword(false)}
-  >
-    {showPassword ? <FaEyeSlash /> : <FaEye />}
-  </button>
-</div>
+          <div className="input-group">
+            <label>PASSWORD</label>
+            <div className="input-field">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+              />
+              <button
+                type="button"
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+                tabIndex="-1"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+          </div>
 
+          <button type="submit" className="login-button">
+            ACCESS SYSTEM
+          </button>
+        </form>
 
-        <button type="submit">Login</button>
-      </form>
+        <div className="login-separator">
+          <span>OR</span>
+        </div>
 
-      {/* Google Sign-In Button */}
-      <button className="google-login-btn" onClick={handleGoogleLogin}>
-        Sign in with Google
-      </button>
+        <button className="google-login-btn" onClick={handleGoogleLogin}>
+          <FaGoogle /> SIGN IN WITH GOOGLE
+        </button>
 
-      <p>
-        Don't have an account? <Link to="/signup">Sign Up</Link>
-      </p>
+        <div className="signup-link">
+          NO ACCOUNT? <Link to="/signup">REGISTER</Link>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,151 +1,745 @@
+/* Market.css - GTA 5 Stock Market Style - Full Page Layout */
+html, body, #root, body > div {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #000;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
 .market-container {
-    width: 80%;
-    margin: auto;
-    font-family: Arial, sans-serif;
-    padding: 20px;
+  background-color: #0f0f0f;
+  color: #ffffff;
+  font-family: 'Chakra Petch', 'Roboto Condensed', sans-serif;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
-h1 {
-    text-align: left;
-    font-size: 28px;
-    font-weight: bold;
+.market-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 15px 20px;
+  background-color: #0f0f0f;
+  border-bottom: 1px solid #333;
 }
 
-.search-box {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 20px;
+.home-button {
+  position: absolute;
+  left: 20px;
+  background-color: #044381;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.home-button:hover {
+  background-color: #0a539c;
+  box-shadow: 0 0 10px rgba(4, 67, 129, 0.5);
+}
+
+.market-container h1 {
+  color: #4a9df3;
+  font-size: 36px;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(74, 157, 243, 0.5);
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.market-status {
+  background-color: #121212;
+  padding: 10px;
+  text-align: center;
+}
+
+.market-status p {
+  margin: 0;
+  font-size: 16px;
+  color: #00ff66;
+}
+
+.market-status p.error {
+  color: #ff3e3e;
 }
 
 .market-content {
-    display: flex;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
 }
 
-.stock-table {
-    width: 50%;
-    border-collapse: collapse;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+/* Balance Display */
+.balance-display {
+  background-color: #121212;
+  padding: 15px 20px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
 }
 
-.stock-table th, .stock-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+.balance-label {
+  color: #aaa;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
-.stock-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
+.balance-amount {
+  color: #4a9df3;
+  font-size: 24px;
+  font-weight: 700;
 }
 
-.green {
-    color: green;
-    font-weight: bold;
+/* Search Controls */
+.search-controls {
+  grid-column: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  background-color: #121212;
+  border-radius: 4px;
+  padding: 15px;
+  border: 1px solid #333;
 }
 
-.red {
-    color: red;
-    font-weight: bold;
+.search-bar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
+.search-bar input {
+  flex: 1;
+  background-color: #0a0a0a;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #4a9df3;
+  box-shadow: 0 0 10px rgba(74, 157, 243, 0.3);
+}
+
+.search-button {
+  background-color: #3a3a3a;
+  color: #fff;
+  border: none;
+  padding: 0 25px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-button:hover {
+  background-color: #444;
+}
+
+.search-button:disabled {
+  background-color: #222;
+  color: #555;
+  cursor: not-allowed;
+}
+
+.predict-button {
+  background-color: #ff3e3e;
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 1px;
+  margin: 10px auto;
+  display: block;
+}
+
+.predict-button:hover {
+  background-color: #ff5555;
+  box-shadow: 0 0 15px rgba(255, 62, 62, 0.5);
+}
+
+.predict-button:disabled {
+  background-color: #333;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Time Range Controls */
+.time-range-controls {
+  display: flex;
+  gap: 5px;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  padding: 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.time-range-controls button {
+  background-color: transparent;
+  color: #aaa;
+  border: none;
+  padding: 8px 15px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.time-range-controls button:hover {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+.time-range-controls button.active {
+  background-color: #4a9df3;
+  color: #000;
+}
+
+/* Chart Container */
 .chart-container {
-    width: 1500px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+  background-color: #121212;
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 350px;
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+  grid-column: 1 / 2;
 }
 
-h2 {
-    font-size: 20px;
-    margin-bottom: 5px;
+.chart-container h2 {
+  color: #4a9df3;
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #222;
+}
+
+.recharts-text {
+  fill: #aaa;
+}
+
+.recharts-tooltip-cursor {
+  stroke: #4a9df3;
+}
+
+.custom-tooltip {
+  background-color: #0a0a0a;
+  border: 1px solid #4a9df3;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(74, 157, 243, 0.5);
+}
+
+.tooltip-date {
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.tooltip-price {
+  color: #00ff66;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .loading {
-    color: #555;
-    font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  color: #aaa;
+  font-size: 16px;
 }
 
-.error {
-    color: red;
-    font-size: 14px;
+/* Stock Table Section */
+.stock-table-section {
+  background-color: #121212;
+  border-radius: 4px;
+  padding: 15px;
+  border: 1px solid #333;
+  grid-column: 2 / 3;
+  grid-row: 2 / 4;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
-/* Time Range Buttons */
-.time-buttons {
-    margin-top: 15px;
+.stock-table-section h2 {
+  color: #4a9df3;
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
-.time-buttons button {
-    margin: 5px;
-    padding: 8px 12px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #ddd;
-    transition: background-color 0.3s;
+.stock-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.time-buttons button.active {
-    background-color: #4CAF50;
-    color: white;
-    font-weight: bold;
+.stock-table thead {
+  background-color: #1a1a1a;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
-.time-buttons button:hover {
-    background-color: #bbb;
+.stock-table th {
+  padding: 12px 8px;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #aaa;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #333;
 }
 
-.time-range-buttons {
-    margin: 20px 0;
-    display: flex;
+.stock-table tbody tr {
+  background-color: #0a0a0a;
+  transition: background-color 0.2s;
+}
+
+.stock-table tbody tr:hover {
+  background-color: #1a1a1a;
+}
+
+.stock-table td {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #222;
+}
+
+.stock-table td.clickable {
+  color: #4a9df3;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.stock-table td.clickable:hover {
+  text-decoration: underline;
+  color: #7ab9ff;
+}
+
+/* Prediction Container */
+.prediction-container {
+  background-color: #121212;
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid #333;
+  position: relative;
+  grid-column: 1 / 2;
+}
+
+.prediction-container h3 {
+  color: #ff3e3e;
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.prediction-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.prediction-item {
+  text-align: center;
+  padding: 10px;
+}
+
+.prediction-item .label {
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.prediction-item .value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.prediction-item .value.predicted {
+  color: #00ff66;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+}
+
+.prediction-arrow {
+  color: #4a9df3;
+  font-size: 24px;
+  margin: 0 5px;
+}
+
+.positive {
+  color: #00ff66 !important;
+}
+
+.negative {
+  color: #ff3e3e !important;
+}
+
+.prediction-change {
+  display: block;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.prediction-trend {
+  display: block;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.prediction-value {
+  font-weight: 600;
+}
+
+.training-status {
+  text-align: center;
+  margin: 10px 0;
+  padding: 5px;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  color: #fff;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.buy-button {
+  background-color: #267f38;
+  color: #fff;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+
+.buy-button:hover {
+  background-color: #2d9643;
+  box-shadow: 0 0 10px rgba(38, 127, 56, 0.5);
+}
+
+.buy-button:disabled {
+  background-color: #333;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Buy Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.buy-modal {
+  background-color: #121212;
+  border: 2px solid #4a9df3;
+  border-radius: 4px;
+  padding: 25px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 30px rgba(74, 157, 243, 0.3);
+  color: #fff;
+  position: relative;
+}
+
+.buy-modal h3 {
+  color: #4a9df3;
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stock-price {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.shares-input {
+  margin-bottom: 20px;
+}
+
+.shares-input label {
+  display: block;
+  margin-bottom: 10px;
+  color: #aaa;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.shares-input input {
+  width: 100%;
+  padding: 12px;
+  background-color: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+}
+
+.shares-input input:focus {
+  outline: none;
+  border-color: #4a9df3;
+  box-shadow: 0 0 10px rgba(74, 157, 243, 0.3);
+}
+
+.transaction-summary {
+  background-color: #0a0a0a;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.total-label {
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.total-cost {
+  color: #00ff66;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.buy-error {
+  background-color: rgba(255, 62, 62, 0.2);
+  color: #ff3e3e;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 62, 62, 0.5);
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.confirm-button, .cancel-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  flex: 1;
+}
+
+.confirm-button {
+  background-color: #267f38;
+  color: #fff;
+}
+
+.confirm-button:hover {
+  background-color: #2d9643;
+  box-shadow: 0 0 10px rgba(38, 127, 56, 0.5);
+}
+
+.cancel-button {
+  background-color: #8b2020;
+  color: #fff;
+}
+
+.cancel-button:hover {
+  background-color: #a32626;
+  box-shadow: 0 0 10px rgba(139, 32, 32, 0.5);
+}
+
+.loading-message {
+  color: #aaa;
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* Hide scrollbar while keeping functionality */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .market-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .chart-container,
+  .prediction-container,
+  .stock-table-section {
+    grid-column: 1;
+  }
+  
+  .stock-table-section {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-button {
+    position: relative;
+    left: 0;
+    margin-right: 15px;
+  }
+  
+  .market-header {
+    flex-direction: column;
     gap: 10px;
-    flex-wrap: wrap;
+    padding: 10px;
+  }
+  
+  .market-container h1 {
+    font-size: 24px;
+  }
+  
+  .search-bar {
+    flex-direction: column;
+  }
+  
+  .search-button {
+    width: 100%;
     justify-content: center;
+  }
 }
 
-.time-button {
-    padding: 8px 16px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+/* Reset any App.js container styles */
+#root > div {
+  background-color: #0f0f0f;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-.time-button:hover {
-    background-color: #f0f0f0;
-}
-
-.time-button.active {
-    background-color: #4CAF50;
-    color: white;
-    border-color: #4CAF50;
-}
-
-.prediction-card {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.prediction-card h3 {
-    margin-top: 0;
-    color: #2c3e50;
-}
-
-.prediction-card strong {
-    color: #4CAF50;
-    font-size: 1.2em;
+.App {
+  background-color: #0f0f0f;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }

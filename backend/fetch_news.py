@@ -1,3 +1,4 @@
+#fetch_news.py
 import requests
 import pandas as pd
 import nltk
@@ -13,9 +14,6 @@ nltk.download('punkt')
 # API Configuration
 NEWS_API_KEY = "9b4a0ebcb094464cb0ba7d7d18eeac3c"  # Replace with your API key
 NEWS_API_URL = "https://newsapi.org/v2/everything"
-
-
-
 
 
 def fetch_news_headlines(symbol, days=10, max_articles=20):

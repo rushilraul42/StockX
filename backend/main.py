@@ -1,3 +1,4 @@
+#main.py
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from tensorflow.keras.models import load_model
@@ -8,6 +9,7 @@ import os
 import logging
 from train_model import train_stock_model
 import traceback
+from sentiment_analysis import fetch_news_headlines, fetch_news_sentiment  # Import sentiment functions
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -199,6 +201,43 @@ def list_available_models():
     except Exception as e:
         logger.error(f"Error listing models: {e}")
         raise HTTPException(status_code=500, detail="Failed to list models")
+
+
+# New sentiment analysis endpoint
+@app.get("/sentiment/{symbol}")
+async def get_sentiment(symbol: str):
+    """Get sentiment analysis for news related to a stock symbol."""
+    try:
+        logger.info(f"Analyzing sentiment for {symbol}")
+        
+        # Get news headlines for the symbol (10 days data)
+        headlines = fetch_news_headlines(symbol, days=10)
+        
+        if not headlines:
+            logger.warning(f"No news headlines found for {symbol}")
+            return {
+                "symbol": symbol,
+                "sentiment": 0,
+                "headlines": [],
+                "message": "No news found for this symbol"
+            }
+            
+        # Calculate sentiment score
+        sentiment_score = fetch_news_sentiment(symbol, days=10)
+        
+        logger.info(f"Sentiment score for {symbol}: {sentiment_score}")
+        
+        return {
+            "symbol": symbol,
+            "sentiment": sentiment_score, 
+            "headlines": headlines,
+            "message": "Sentiment analysis successful"
+        }
+    except Exception as e:
+        logger.error(f"Error analyzing sentiment for {symbol}: {e}")
+        logger.error(traceback.format_exc())
+        raise HTTPException(status_code=500, detail=f"Error analyzing sentiment: {str(e)}")
+
 
 # Run the backend server
 if __name__ == "__main__":

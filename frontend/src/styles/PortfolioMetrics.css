@@ -1,0 +1,224 @@
+/* PortfolioMetrics.css */
+.portfolio-metrics {
+    background-color: #121212;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #333;
+    color: #fff;
+  }
+  
+  .portfolio-metrics h2 {
+    color: #4a9df3;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
+  .portfolio-metrics h3 {
+    color: #4a9df3;
+    font-size: 18px;
+    margin: 25px 0 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  
+  .metrics-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .metric-card {
+    flex: 1;
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    padding: 15px;
+    border: 1px solid #333;
+    text-align: center;
+  }
+  
+  .metric-label {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  .metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #00ccff;
+  }
+  
+  .positive {
+    color: #00ff66 !important;
+  }
+  
+  .negative {
+    color: #ff3e3e !important;
+  }
+  
+  .chart-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .time-range-selectors {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .time-range-selectors button,
+  .chart-type-selectors button {
+    background-color: #1a1a1a;
+    color: #aaa;
+    border: 1px solid #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  
+  .time-range-selectors button:hover,
+  .chart-type-selectors button:hover {
+    background-color: #222;
+    color: #ddd;
+  }
+  
+  .time-range-selectors button.active,
+  .chart-type-selectors button.active {
+    background-color: #4a9df3;
+    color: #000;
+    border-color: #4a9df3;
+  }
+  
+  .chart-type-selectors {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .chart-type-selectors button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+  
+  .chart-container {
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid #333;
+    height: 340px;
+  }
+  
+  .pie-chart-container h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .assets-breakdown {
+    margin-top: 25px;
+  }
+  
+  .assets-table-container {
+    overflow-x: auto;
+  }
+  
+  .assets-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: #00ccff;
+  }
+  
+  .assets-table th,
+  .assets-table td {
+    padding: 12px 10px;
+    text-align: center;
+  }
+  
+  .assets-table th {
+    background-color: #1a1a1a;
+    color: #aaa;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #333;
+  }
+  
+  .assets-table td {
+    border-bottom: 1px solid #333;
+  }
+  
+  .assets-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .custom-tooltip {
+    background-color: #0a0a0a;
+    border: 1px solid #4a9df3;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(74, 157, 243, 0.5);
+  }
+  
+  .tooltip-date {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .tooltip-value {
+    color: #00ff66;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .loading-message,
+  .empty-portfolio-message,
+  .error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: #aaa;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .error-message {
+    color: #ff3e3e;
+  }
+  
+  @media (max-width: 768px) {
+    .metrics-summary {
+      flex-direction: column;
+    }
+    
+    .chart-controls {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .time-range-selectors,
+    .chart-type-selectors {
+      width: 100%;
+      justify-content: center;
+    }
+  }

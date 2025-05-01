@@ -1,0 +1,242 @@
+/* AlertsManager.css */
+.alerts-manager {
+    background-color: #121212;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #333;
+    color: #fff;
+  }
+  
+  .alerts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .alerts-header h2 {
+    color: #4a9df3;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
+  .add-alert-btn {
+    background-color: #267f38;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  
+  .add-alert-btn:hover {
+    background-color: #2d9643;
+    box-shadow: 0 0 10px rgba(38, 127, 56, 0.5);
+  }
+  
+  .alert-error-message {
+    background-color: rgba(255, 62, 62, 0.2);
+    color: #ff3e3e;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 62, 62, 0.5);
+    text-align: center;
+  }
+  
+  .new-alert-form {
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    color: #aaa;
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    background-color: #121212;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #ddd;
+    font-size: 16px;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #4a9df3;
+    outline: none;
+    box-shadow: 0 0 10px rgba(74, 157, 243, 0.3);
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+  }
+  
+  .create-alert-btn {
+    width: 100%;
+    background-color: #4a9df3;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  
+  .create-alert-btn:hover {
+    background-color: #6eb5ff;
+    box-shadow: 0 0 10px rgba(74, 157, 243, 0.5);
+  }
+  
+  .alerts-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: #aaa;
+  }
+  
+  .no-alerts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    color: #aaa;
+    text-align: center;
+  }
+  
+  .create-first-alert-btn {
+    background-color: #267f38;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  
+  .create-first-alert-btn:hover {
+    background-color: #2d9643;
+    box-shadow: 0 0 10px rgba(38, 127, 56, 0.5);
+  }
+  
+  .alerts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .alert-item {
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    padding: 15px;
+    border: 1px solid #333;
+    transition: all 0.2s;
+  }
+  
+  .alert-item:hover {
+    background-color: #242424;
+  }
+  
+  .alert-item.triggered {
+    background-color: rgba(255, 62, 62, 0.1);
+    border-color: rgba(255, 62, 62, 0.3);
+  }
+  
+  .alert-symbol {
+    font-weight: 700;
+    font-size: 18px;
+    color: #4a9df3;
+    width: 100px;
+  }
+  
+  .alert-details {
+    flex: 1;
+  }
+  
+  .alert-condition {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #ddd;
+  }
+  
+  .alert-status {
+    font-size: 12px;
+    color: #aaa;
+    text-transform: uppercase;
+  }
+  
+  .alert-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .delete-alert-btn {
+    background-color: transparent;
+    color: #aaa;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 16px;
+  }
+  
+  .delete-alert-btn:hover {
+    color: #ff3e3e;
+  }
+  
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
